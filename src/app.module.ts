@@ -1,17 +1,20 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
 import { CustomPrismaModule } from 'nestjs-prisma';
-import { UserModule } from './user/user.module';
 import { extendedPrismaClient } from './prisma/extension';
+import { ValidationRuleModule } from './validation-rule/validation-rule.module';
 
 @Module({
-  imports: [CustomPrismaModule.forRootAsync({
-    name: 'PrismaService',
-    useFactory: () => {
-      return extendedPrismaClient;
-    }
-  }), UserModule],
-  controllers: [AppController],
+  imports: [
+    CustomPrismaModule.forRootAsync({
+      name: 'PrismaService',
+      useFactory: () => {
+        return extendedPrismaClient;
+      },
+      isGlobal: true,
+    }), 
+    ValidationRuleModule,
+  ],
+  controllers: [],
   providers: [],
 })
 export class AppModule {}
