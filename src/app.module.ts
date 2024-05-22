@@ -1,10 +1,9 @@
 import { Module } from '@nestjs/common';
 import { CustomPrismaModule } from 'nestjs-prisma';
-import { UserModule } from './user/user.module';
 import { extendedPrismaClient } from './prisma/extension';
-import { V1Module } from './http/controllers/v1/v1.module';
-import { RouterModule } from '@nestjs/core';
 import { ValidationRuleModule } from './validation-rule/validation-rule.module';
+import { HTTPModule } from './http/controllers/v1/http.module';
+import { RouterModule } from '@nestjs/core';
 
 @Module({
   imports: [
@@ -16,15 +15,7 @@ import { ValidationRuleModule } from './validation-rule/validation-rule.module';
       isGlobal: true,
     }), 
     ValidationRuleModule,
-    V1Module,
-    RouterModule.register([
-      {
-        path: 'api/v1',
-        module: V1Module,
-      }
-    ])
+    HTTPModule, 
   ],
-  controllers: [],
-  providers: [],
 })
 export class AppModule {}
