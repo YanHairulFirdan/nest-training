@@ -16,7 +16,6 @@ import { ValidationRuleModule } from './validation-rule/validation-rule.module';
       isGlobal: true,
     }), 
     ValidationRuleModule,
-    UserModule,
     V1Module,
     RouterModule.register([
       {
