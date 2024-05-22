@@ -5,6 +5,7 @@ export class RegisterUserDto {
     @IsNotEmpty()
     @IsString()
     name: string;
+
     @IsNotEmpty()
     @IsEmail()
     @Unique({
@@ -13,6 +14,7 @@ export class RegisterUserDto {
       attribute: 'email',
     })
     email: string;
+
     @IsNotEmpty()
     password: string;
   }
