@@ -7,7 +7,6 @@ export default class ValidationExceptionFilter implements ExceptionFilter {
         const ctx      = host.switchToHttp();
         const response = ctx.getResponse<Response>();
         const request  = ctx.getRequest<Request>();
-        const status   = exception.getStatus();
         const exceptionResponse = exception.getResponse();
 
         const errorPayload = typeof exceptionResponse === 'string'
@@ -18,19 +17,21 @@ export default class ValidationExceptionFilter implements ExceptionFilter {
                 errors: this.parseErrors(exceptionResponse['message'], request),
             };
 
-        response.status(status).json(errorPayload);
+        response.status(HttpStatus.UNPROCESSABLE_ENTITY).json(errorPayload);
     };
 
     parseErrors(validationMessages: string[], request: Request) {
-        const errors = {};
+        const errors: Record<string, string> = {};
 
-        Object.keys(request.body).forEach((key) => {
-            const error: string = validationMessages.find((message) => message.includes(key));
-            if (error) {
-                errors[key] = error;
+        validationMessages.forEach((error: string) => {
+            const [property, ...constraints] = error.split(' ');
+            
+            if (!errors[property]) {
+                constraints.unshift(property);
+                errors[property] = constraints.join(' ');
             }
         });
 
-        return errors;
+       return errors;
     }
 }
