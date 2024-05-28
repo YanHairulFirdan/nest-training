@@ -12,6 +12,7 @@ export class AuthController {
     @Inject()
     private userService: UserService;
 
+    @Public()
     @HttpCode(200)
     @Post('/register')
     async register(@Body() data: RegisterUserDto) {
