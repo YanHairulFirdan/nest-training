@@ -7,7 +7,7 @@ import {
 } from 'class-validator';
 import { ExistRuleOptions, Result } from '../interfaces';
 import { CustomPrismaService } from 'nestjs-prisma';
-import { ExtendedPrismaClient } from 'src/prisma/extension';
+import { ExtendedPrismaClient } from 'src/providers/database/prisma/extenstions/extension';
 
 @Injectable()
 @ValidatorConstraint({ name: 'exists' })

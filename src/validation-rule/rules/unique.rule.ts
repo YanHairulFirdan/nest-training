@@ -6,7 +6,7 @@ import {
   registerDecorator,
 } from 'class-validator';
 import { ExistRuleOptions, Result } from '../interfaces';
-import { ExtendedPrismaClient } from 'src/prisma/extension';
+import { ExtendedPrismaClient } from 'src/providers/database/prisma/extenstions/extension';
 import { CustomPrismaService } from 'nestjs-prisma';
 
 @Injectable()

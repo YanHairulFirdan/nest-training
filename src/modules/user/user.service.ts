@@ -1,6 +1,6 @@
 import { Inject, Injectable, UnauthorizedException } from "@nestjs/common";
 import { CustomPrismaService } from "nestjs-prisma";
-import { ExtendedPrismaClient } from "src/prisma/extension";
+import { ExtendedPrismaClient } from "src/providers/database/prisma/extenstions/extension";
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 import { User } from "@prisma/client";
