@@ -6,7 +6,7 @@ import {
     UnauthorizedException 
 } from "@nestjs/common";
 import { Reflector } from "@nestjs/core";
-import UserService from "src/user/user.service"; 
+import UserService from "src/modules/user/user.service"; 
 import { IS_PUBLIC_KEY } from "../decorators/public.decorator";
 
 @Injectable()

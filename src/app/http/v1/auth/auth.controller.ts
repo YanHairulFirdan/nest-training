@@ -1,7 +1,7 @@
 import { Body, Controller, HttpCode, Inject, Post } from "@nestjs/common";
-import UserService from "src/user/user.service";
+import UserService from "src/modules/user/user.service";
 import { RegisterUserDto, LoginUserDto } from "./auth.dto";
-import { Public } from "src/auth/decorators/public.decorator";
+import { Public } from "src/modules/auth/decorators/public.decorator";
 
 @Controller({
     version: "1",
