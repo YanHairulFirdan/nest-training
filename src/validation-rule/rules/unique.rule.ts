@@ -28,15 +28,15 @@ export class UniqueRuleConstraint implements ValidatorConstraintInterface {
       dtoPropertyException,
     ] = args.constraints;
 
-    let query = `SELECT ${column} as target FROM ${table} WHERE ${column} = '${value}'`;
+    let query = `SELECT ${column} as target FROM ${table} WHERE ${column} = $1`;
+    let queryParams = [value];
 
     if (dtoPropertyException  && exceptionColumnName) {
-      const exceptionValue = args.object[dtoPropertyException];
-
-      query = query.concat(` AND ${exceptionColumnName} != '${exceptionValue}'`);
+      query = query.concat(` AND ${exceptionColumnName} != $2`);
+      queryParams.push(args.object[dtoPropertyException]);
     }
 
-    const res = await this.prisma.client.$queryRawUnsafe<Result[]>(query);
+    const res = await this.prisma.client.$queryRawUnsafe<Result[]>(query, ...queryParams);
 
     return res.length === 0;
   }
